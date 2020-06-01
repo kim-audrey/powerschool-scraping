@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 
+
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -7,6 +8,7 @@ const puppeteer = require('puppeteer');
   await page.type('#username', 'username');
   await page.type('#password', 'password');
   //we can change as need be
+  // screenshot area
   await page.setViewport({
     width: 800,
     height: 600,
