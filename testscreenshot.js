@@ -1,11 +1,13 @@
 const puppeteer = require('puppeteer');
 
+
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto('https://ps001.bergen.org/public/home.html');
   
   //we can change as need be
+  // screenshot area
   await page.setViewport({
     width: 800,
     height: 600,
