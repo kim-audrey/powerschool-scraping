@@ -4,7 +4,8 @@ const puppeteer = require('puppeteer');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto('https://ps001.bergen.org/public/home.html');
-  
+  await page.type('#username', 'username');
+  await page.type('#password', 'password');
   //we can change as need be
   await page.setViewport({
     width: 800,
