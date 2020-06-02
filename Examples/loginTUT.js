@@ -20,7 +20,7 @@ const config = require('./config.json')   // contains 2 properties: username + p
     await page.goto('https://ps001.bergen.org/public/home.html', {    waitUntil: 'networkidle2'   });
         // write in username + pwd
     await page.type('#fieldAccount', config.username, {     delay:30    })
-    await page.type('#fieldpassword', config.password, {    delay: 30   })
+    await page.type('#fieldPassword', config.password, {    delay: 30   })
 
     // click sign in button
     await page.click('#btn-enter');
