@@ -13,8 +13,8 @@ const puppeteer = require('puppeteer');
   }); await page.screenshot({path: 'prelogin.png'});
 
   /* LOGGING IN */
-  await page.type('#fieldAccount', "beepbeep", {     delay:30    })
-  await page.type('#fieldPassword', "boop", {    delay: 30   })
+  await page.type('#fieldAccount', "aledru21", {     delay:30    })
+  await page.type('#fieldPassword', "Druz200#", {    delay: 30   })
 
 
 
@@ -22,8 +22,8 @@ const puppeteer = require('puppeteer');
   await page.click('#btn-enter');
   
   await page.setViewport({
-    width: 800,
-    height: 600,
+    width: 1350,
+    height: 625,
     deviceScaleFactor: 1,
   });  await page.screenshot({path: 'loggingin.png'});
 
