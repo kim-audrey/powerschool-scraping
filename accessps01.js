@@ -28,8 +28,5 @@ const puppeteer = require('puppeteer');
   });  await page.screenshot({path: 'gradesnattend.png'});
   
 
-
-  
-
   await browser.close();
 })();
