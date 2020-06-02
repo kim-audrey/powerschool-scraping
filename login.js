@@ -33,9 +33,14 @@ const config = require('./config.json')   // contains 2 properties: username + p
     try{
                                         // change this thing to suit powerschool's
         await page.waitFor('[data-click="profile_icon"]');
+    } catch (error){
+        console.log('Failed to login.');
+        process.exit(0);
     }
 
     
+
+
   }
 
 
