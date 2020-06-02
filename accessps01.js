@@ -4,16 +4,17 @@ const puppeteer = require('puppeteer');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto('https://ps001.bergen.org/public/home.html');
-  
+
 
   /* LOGGING IN */
-  await page.type('#fieldAccount', "audkim21", {     delay:30    })
-  await page.type('#fieldPassword', "29137005095432a*", {    delay: 30   })
 
+
+  await page.type('#fieldAccount', "aledru21", {     delay:30    })
+  await page.type('#fieldPassword', "Druz200#", {    delay: 30   })
 
   // click sign in button
   await page.click('#btn-enter');
-  
+
 
   await page.setViewport({
     width: 1350,
@@ -25,7 +26,7 @@ const puppeteer = require('puppeteer');
   await page.waitForNavigation({  waitUnitl: 'networkidle0    '});
   await page.waitFor(1500000);
 
-  
+
     // we're going to try clicking on something on the logged in page and exit if we don't get it
     try{
          // change this thing to suit powerschool's
