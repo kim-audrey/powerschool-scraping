@@ -13,9 +13,14 @@ const puppeteer = require('puppeteer');
   }); await page.screenshot({path: 'prelogin.png'});
 
   /* LOGGING IN */
+<<<<<<< HEAD:testscreenshot.js
   await page.type('#fieldAccount', "aledru21", {     delay:30    })
   await page.type('#fieldPassword', "Druz200#", {    delay: 30   })
 
+=======
+  await page.type('#fieldAccount', "a@bergen.org", {     delay:30    })
+  await page.type('#fieldPassword', "stuff", {    delay: 30   })
+>>>>>>> bec83e23b822ebfb87dccdd2c3bccfe300572d4a:accessps01.js
 
 
   // click sign in button
