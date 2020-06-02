@@ -19,7 +19,7 @@ const config = require('./config.json')   // contains 2 properties: username + p
   else{
     await page.goto('https://ps001.bergen.org/public/home.html', {    waitUntil: 'networkidle2'   });
         // write in username + pwd
-    await page.type('#fieldAccount', config.username, { delay:30    })
+    await page.type('#fieldAccount', config.username, {     delay:30    })
     await page.type('#fieldpassword', config.password, {    delay: 30   })
 
     // click sign in button
@@ -32,16 +32,21 @@ const config = require('./config.json')   // contains 2 properties: username + p
     // we're going to try clicking on something on the logged in page and exit if we don't get it
     try{
                                         // change this thing to suit powerschool's
-        await page.waitFor('[data-click="profile_icon"]');
+        await page.waitFor('[data-click=".feedback-alert"]');
     } catch (error){
         console.log('Failed to login.');
         process.exit(0);
     }
 
-    
+    // get current browswer page session
+    let currenCookies = await page.cookies();
 
+    // create a cookie file (if not already created) to hold the session
+    fs.writeFileSync('./cookies.json', JSON.stringify(currentCookies));
 
   }
+
+  debugger;
 
 
 
