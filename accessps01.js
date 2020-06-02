@@ -15,30 +15,21 @@ const puppeteer = require('puppeteer');
   // click sign in button
   await page.click('#btn-enter');
 
+  // await page.waitForNavigation({  waitUnitl: 'networkidle0    '});
+ // await page.waitFor(1500000);
+
+
+  await page.goto('https://ps001.bergen.org/guardian/home.html');
 
   await page.setViewport({
     width: 1350,
     height: 625,
     deviceScaleFactor: 1,
-  });  await page.screenshot({path: 'loggingin.png'});
+  });  await page.screenshot({path: 'gradesnattend.png'});
+  
 
 
-  await page.waitForNavigation({  waitUnitl: 'networkidle0    '});
-  await page.waitFor(1500000);
-
-
-    // we're going to try clicking on something on the logged in page and exit if we don't get it
-    try{
-         // change this thing to suit powerschool's
-        await page.waitFor('[data-click=".feedback-alert"]');
-    } catch (error){
-        console.log('Failed to login.');
-        process.exit(0);
-    }
-
-
-
-  debugger;
+  
 
   await browser.close();
 })();
