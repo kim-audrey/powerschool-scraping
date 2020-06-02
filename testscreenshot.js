@@ -10,8 +10,39 @@ const puppeteer = require('puppeteer');
     width: 800,
     height: 600,
     deviceScaleFactor: 1,
-  });
-  await page.screenshot({path: 'example.png'});
+  }); await page.screenshot({path: 'prelogin.png'});
+
+  /* LOGGING IN */
+  await page.type('#fieldAccount', "beepbeep", {     delay:30    })
+  await page.type('#fieldPassword', "boop", {    delay: 30   })
+
+
+
+  // click sign in button
+  await page.click('#btn-enter');
+  
+  await page.setViewport({
+    width: 800,
+    height: 600,
+    deviceScaleFactor: 1,
+  });  await page.screenshot({path: 'loggingin.png'});
+
+  await page.waitForNavigation({  waitUnitl: 'networkidle0    '});
+  await page.waitFor(1500000);
+
+  
+    // we're going to try clicking on something on the logged in page and exit if we don't get it
+    try{
+         // change this thing to suit powerschool's
+        await page.waitFor('[data-click=".feedback-alert"]');
+    } catch (error){
+        console.log('Failed to login.');
+        process.exit(0);
+    }
+
+
+
+  debugger;
 
   await browser.close();
 })();
