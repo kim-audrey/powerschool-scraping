@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const table = require('table');
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -28,7 +29,35 @@ const fs = require('fs');
   });
   fs.mkdir('images', (err)=>{});
   await page.screenshot({path: 'images/gradesnattend.png'});
-  
+
+
+
+  const result = await page.evaluate(() => {
+    const rows = document.querySelectorAll('table tr');
+    return Array.from(rows, row => {
+      const columns = row.querySelectorAll('td');
+      return Array.from(columns, column => column.innerText);
+    });
+  });
+  console.log(result.length);
+let tab = new Array(result.length+1);
+
+for(i=0;i<tab.length;i++){
+  tab[i]=new Array(5);
+}
+tab[0][0]="Course";
+tab[0][1]="Tri 1";
+tab[0][2]="Tri 2";
+tab[0][3]="Tri 3";
+tab[0][4]="Overall";
+  for(i=1;i<result.length;i++){  
+    tab[i][0]=result[i-1][11]
+    tab[i][1]=result[i-1][12]
+    tab[i][2]=result[i-1][13]
+    tab[i][3]=result[i-1][14]
+    tab[i][4]=result[i-1][15] 
+  }
+  console.log(table.table(tab));
 
   await browser.close();
 })();
