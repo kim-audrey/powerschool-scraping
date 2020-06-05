@@ -26,9 +26,7 @@ const fs = require('fs');
     height: 625,
     deviceScaleFactor: 1,
   });
-  fs.mkdir('images', (err)=>{
-    if(err){}
-  });
+  fs.mkdir('images', (err)=>{});
   await page.screenshot({path: 'images/gradesnattend.png'});
   
 
