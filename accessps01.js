@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-
+const fs = require('fs');
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -25,7 +25,11 @@ const puppeteer = require('puppeteer');
     width: 1350,
     height: 625,
     deviceScaleFactor: 1,
-  });  await page.screenshot({path: 'gradesnattend.png'});
+  });
+  fs.mkdir('images', (err)=>{
+    if(err){}
+  });
+  await page.screenshot({path: 'images/gradesnattend.png'});
   
 
   await browser.close();
