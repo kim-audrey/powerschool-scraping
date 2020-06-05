@@ -1,6 +1,7 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const table = require('table');
+let login;
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -8,15 +9,16 @@ const table = require('table');
 
 
   /* LOGGING IN */
-
-
-  await page.type('#fieldAccount', "aledru21", {     delay:30    })
-  await page.type('#fieldPassword', "Druz200#", {    delay: 30   })
+  login = await fs.readFileSync('login.txt','utf8').split("\r\n");
+while((await page.$$('#fieldAccount')).length!=0){
+  await page.type('#fieldAccount', login[0], {     delay:30    })
+  await page.type('#fieldPassword', login[1], {    delay: 30   })
 
   // click sign in button
   await page.click('#btn-enter');
+  await page.waitForNavigation({  waitUnitl: 'networkidle0    '});
+}
 
-  // await page.waitForNavigation({  waitUnitl: 'networkidle0    '});
  // await page.waitFor(1500000);
 
 
@@ -39,8 +41,8 @@ const table = require('table');
       return Array.from(columns, column => column.innerText);
     });
   });
-  console.log(result.length);
-let tab = new Array(result.length+1);
+
+  let tab = new Array(result.length+1);
 
 for(i=0;i<tab.length;i++){
   tab[i]=new Array(5);
@@ -58,6 +60,12 @@ tab[0][4]="Overall";
     tab[i][4]=result[i-1][15] 
   }
   console.log(table.table(tab));
-
+//.innerHTML  .href     .getAttribute("href");
+// const hrefs1 = await page.evaluate(
+//   () => Array.from(
+//     document.querySelectorAll('a[href]'),
+//     a => a.getAttribute('href')
+//   )
+// );
   await browser.close();
 })();
