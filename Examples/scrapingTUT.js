@@ -8,7 +8,7 @@ async function scrapeProduct(URL HERE){
     await page.goto(URL HERE);
 
     // .$x is pupetteer's selector, select an item by xpath
-    const [el] = await page.$x('//*[@id="ccid_817487"]/td[13]/a');
+    const [el] = await page.$x('//*[@id="ccid_817487"]/td[13]/a'); 
     const src = await el.getProperty('src');
     const srcTxt = src.jsonValue();
 
