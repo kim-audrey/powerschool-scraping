@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const table = require('table');
-let login;
+
+
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -9,14 +10,16 @@ let login;
 
 
   /* LOGGING IN */
-  login = await fs.readFileSync('login.txt','utf8').split("\r\n");
-while((await page.$$('#fieldAccount')).length!=0){
-  await page.type('#fieldAccount', login[0], {     delay:30    })
-  await page.type('#fieldPassword', login[1], {    delay: 30   })
+  let login =fs.readFileSync('login.txt','utf8').split("\r\n");
 
-  // click sign in button
-  await page.click('#btn-enter');
-  await page.waitForNavigation({  waitUnitl: 'networkidle0    '});
+  while((await page.$$('#fieldAccount')).length!=0){
+
+    await page.type('#fieldAccount', login[0], {     delay:30    })
+    await page.type('#fieldPassword', login[1], {    delay: 30   })
+
+    // click sign in button
+    await page.click('#btn-enter');
+    await page.waitForNavigation({  waitUnitl: 'networkidle0    '});
 }
 
  // await page.waitFor(1500000);
@@ -60,12 +63,7 @@ tab[0][4]="Overall";
     tab[i][4]=result[i-1][15] 
   }
   console.log(table.table(tab));
-//.innerHTML  .href     .getAttribute("href");
-// const hrefs1 = await page.evaluate(
-//   () => Array.from(
-//     document.querySelectorAll('a[href]'),
-//     a => a.getAttribute('href')
-//   )
-// );
+
+
   await browser.close();
 })();
