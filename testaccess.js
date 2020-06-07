@@ -29,34 +29,26 @@ const table = require('table');
     await page.waitForNavigation({  waitUnitl: 'networkidle0    '});
 }
 
- // await page.waitFor(1500000);
 
 
   await page.goto('https://ps001.bergen.org/guardian/home.html');
 
+  //get all hrefs for subpages
 const result = await page.evaluate(
     () => Array.from(
       document.querySelectorAll('table tr td a[href]'),
       a => a.getAttribute('href')
     )
   );
+
+  //get only the hrefs that are needed
   let scores=new Array;
 for(i=0;i<result.length;i++){
     if(result[i].substring(0,15)=="scores.html?frn")
         scores.push(result[i]);
 }
 
-// const result =await page.$$eval("td", anchors => [].map.call(anchors, td => td.href));
 console.log(scores);
-
-
-//.innerHTML  .href     .getAttribute("href");
-// const hrefs1 = await page.evaluate(
-//   () => Array.from(
-//     document.querySelectorAll('a[href]'),
-//     a => a.getAttribute('href')
-//   )
-// );
 
   await browser.close();
 })();
