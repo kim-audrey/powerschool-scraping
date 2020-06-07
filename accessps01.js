@@ -12,7 +12,7 @@ const table = require('table');
   /* LOGGING IN */
   let login =fs.readFileSync('login.txt','utf8').split("\r\n");
 
-  while((await page.$$('#fieldAccount')).length!=0){
+  while ((await page.$$('#fieldAccount')).length!=0){
 
     await page.type('#fieldAccount', login[0], {     delay:30    })
     await page.type('#fieldPassword', login[1], {    delay: 30   })
