@@ -62,7 +62,9 @@ tab[0][4]="Overall";
     tab[i][3]=result[i-1][14]
     tab[i][4]=result[i-1][15] 
   }
-  console.log(table.table(tab));
+  fs.mkdir('results', (err)=>{});
+  fs.writeFile('results/overview.txt', table.table(tab), (err)=>{});
+
 
 
   await browser.close();
