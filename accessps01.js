@@ -61,17 +61,27 @@ tab[0][1]="Tri 1";
 tab[0][2]="Tri 2";
 tab[0][3]="Tri 3";
 tab[0][4]="Overall";
-  for(i=1;i<result.length;i++){  
-    tab[i][0]=result[i-1][11]
-    tab[i][1]=result[i-1][12]
-    tab[i][2]=result[i-1][13]
-    tab[i][3]=result[i-1][14]
-    tab[i][4]=result[i-1][15] 
+  for(i=1;i<result.length-2;i++){
+    var name = result[i-1][11];
+    var tri1 = result[i-1][12];
+    var tri2 = result[i-1][13];
+    var tri3 = result[i-1][14];
+    var overall = result[i-1][15];
+    if(name != null &&  (tri1!="[ i ]" || tri1!=" " || tri2!="[ i ]" ||tri2!=" " || tri3!="[ i ]" ||tri3!=" ")){  
+      tab[i][0]=name.split("\n")[0];
+      tab[i][1]=tri1;
+      tab[i][2]=tri2;
+      tab[i][3]=tri3;
+      tab[i][4]=overall; 
+    }
   }
 
   //write results into file
   fs.mkdir('results', (err)=>{});
-  fs.writeFile('results/overview.txt', table.table(tab), (err)=>{});
+//  fs.writeFile('results/overview.txt', table.table(tab), (err)=>{});
+
+  //var json = JSON.stringify({overview: tab});
+  fs.writeFile("results/results.json", JSON.stringify({overview: tab}), (err)=>{});
 
 
 
