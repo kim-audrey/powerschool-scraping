@@ -36,9 +36,9 @@ const table = require('table');
   await page.screenshot({path: 'images/gradesnattend.png'});
 
 
-
+  // evaluates function and set it into result
   const result = await page.evaluate(() => {
-    const rows = document.querySelectorAll('table tr');
+    const rows = document.querySelectorAll('table tr');   // querySelectorAll takes content out of the selector
     return Array.from(rows, row => {
       const columns = row.querySelectorAll('td');
       return Array.from(columns, column => column.innerText);
