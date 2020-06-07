@@ -61,18 +61,20 @@ tab[0][1]="Tri 1";
 tab[0][2]="Tri 2";
 tab[0][3]="Tri 3";
 tab[0][4]="Overall";
-  for(i=1;i<result.length-2;i++){
-    var name = result[i-1][11];
-    var tri1 = result[i-1][12];
-    var tri2 = result[i-1][13];
-    var tri3 = result[i-1][14];
-    var overall = result[i-1][15];
-    if(name != null &&  (tri1!="[ i ]" || tri1!=" " || tri2!="[ i ]" ||tri2!=" " || tri3!="[ i ]" ||tri3!=" ")){  
-      tab[i][0]=name.split("\n")[0];
-      tab[i][1]=tri1;
-      tab[i][2]=tri2;
-      tab[i][3]=tri3;
-      tab[i][4]=overall; 
+var j=0;
+  for(i=0;i<result.length-3;i++){
+    var name = result[i][11];
+    var tri1 = result[i][12];
+    var tri2 = result[i][13];
+    var tri3 = result[i][14];
+    var overall = result[i][15];
+    if(name != null &&  (tri1.includes("\n") || tri2.includes("\n") || tri3.includes("\n"))){  
+      tab[j][0]=name.split("\n")[0];
+      tab[j][1]=tri1;
+      tab[j][2]=tri2;
+      tab[j][3]=tri3;
+      tab[j][4]=overall;
+      j++; 
     }
   }
 
