@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer'); //bot
 const fs = require('fs'); //files
 //const table = require('table'); //make table
-
+var tri;
+const login;
 
 (async () => {
   //launches bot and opens up powerschool
@@ -11,7 +12,7 @@ const fs = require('fs'); //files
 
 
   /* LOGGING IN */
-  const login =fs.readFileSync('login.txt','utf8').split("\r\n");
+  login =fs.readFileSync('login.txt','utf8').split("\r\n");
 
   //Attempt to log in repeatedly till successful
   while ((await page.$$('#fieldAccount')).length!=0){
@@ -86,7 +87,7 @@ var j=0;
       tab[j][2]=tri2;
       tab[j][3]=tri3;
       tab[j][4]=overall;
-      j++; 
+      j++;
     }
   }
 }
@@ -100,6 +101,11 @@ var j=0;
     else{
       bool=!bool;
     }
+  }
+  var grades= new Array(tab.length);
+  for(i=0;i<grades.length;i++){
+    await page.goto(tab[i][4].href);
+    
   }
 
   //write results into file
