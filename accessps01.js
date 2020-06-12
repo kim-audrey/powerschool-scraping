@@ -104,11 +104,11 @@ var j=0;
 
 
   //write results into file
-  fs.mkdir('results', (err)=>{});
+  fs.mkdir('scraped_data', (err)=>{});
 //  fs.writeFile('results/overview.txt', table.table(tab), (err)=>{});
 
   //var json = JSON.stringify({overview: tab});
-  fs.writeFile("results/grades.json", JSON.stringify({overview: tab}), (err)=>{});
+  fs.writeFile("scraped_data/grades.json", JSON.stringify({overview: tab}), (err)=>{});
 
 
 
