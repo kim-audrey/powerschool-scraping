@@ -1,8 +1,10 @@
 {
   "name": "powerschool-scraping",
   "version": "1.0.0",
-  "main": "accessps01.js",
+  "main": "accessps01t.js",
   "scripts": {
+    "start": "node accessps01t",
+    "build": "nexe",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,8 +19,11 @@
   },
   "homepage": "https://github.com/ajk8703/powerschool-scraping#readme",
   "dependencies": {
+    "puppeteer": "^3.3.0",
     "table": "^5.4.6"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nexe": "^3.3.2"
+  },
   "description": ""
 }
