@@ -11,8 +11,8 @@ const table = require('table'); //make table
 
 
   /* LOGGING IN */
-  const login =fs.readFileSync('login.txt','utf8').split("\r\n");
-
+ // const login =fs.readFileSync('login.txt','utf8').split("\r\n");
+  var login = process.argv.slice(2);
   //Attempt to log in repeatedly till successful
   while ((await page.$$('#fieldAccount')).length!=0){
     
