@@ -1,9 +1,16 @@
 const puppeteer = require('puppeteer'); //bot
 const fs = require('fs'); //files
+const mysql = require('mysql');
 
-
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "ps01"
+});
 
 (async () => {
+  
   //launches bot and opens up powerschool
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -27,18 +34,6 @@ const fs = require('fs'); //files
 
   //go to grades
   await page.goto('https://ps001.bergen.org/guardian/home.html');
-/*
-  await page.setViewport({
-    width: 1350,
-    height: 625,
-    deviceScaleFactor: 1,
-  });
-
-
-  //make image directory and save screenshot there.
-  fs.mkdir('images', (err)=>{});
-  await page.screenshot({path: 'images/gradesnattend.png'});
-*/
 
   // evaluates function and set it into result
   //Gets a 2d array of the grades table
@@ -106,10 +101,28 @@ var j=0;
   //write results into file
   fs.mkdir('scraped_data', (err)=>{});
 
-  //var json = JSON.stringify({overview: tab});
-  fs.writeFile("scraped_data/grades.json", JSON.stringify({overview: tab}), (err)=>{});
+  var json = JSON.stringify({overview: tab});
+  fs.writeFile("scraped_data/grades.json", json, (err)=>{});
 
 
 
   await browser.close();
+  con.connect(function(err) {
+    if (err) throw err;
+        //update in current
+    var sql = `UPDATE user SET current = ${json} AND previous = null WHERE id =2`;
+
+    con.query(sql, function (err, result) {
+      if (err) throw err;
+      //console.log(JSON.stringify({overview: tab}));
+    });
+
+    //look at what was just placed
+    var sql2= "SELECT current FROM user where id=2"
+        con.query(sql2, function (err, result) {
+      if (err) throw err;
+      console.log(result);
+      con.end();
+    });
+  });
 })();

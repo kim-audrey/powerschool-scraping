@@ -13,9 +13,10 @@ const table = require('table'); //make table
   /* LOGGING IN */
  // const login =fs.readFileSync('login.txt','utf8').split("\r\n");
   var login = process.argv.slice(2);
+  var count = 0;
   //Attempt to log in repeatedly till successful
   while ((await page.$$('#fieldAccount')).length!=0){
-    
+    if(count>15) process.exit(0);
     //enters log in info
     await page.type('#fieldAccount', login[0], {     delay:30    })
     await page.type('#fieldPassword', login[1], {    delay: 30   })
@@ -23,6 +24,7 @@ const table = require('table'); //make table
     // click sign in button
     await page.click('#btn-enter');
     await page.waitForNavigation({  waitUnitl: 'networkidle0    '});
+    count++;
 }
 
   //go to grades
@@ -54,24 +56,23 @@ const table = require('table'); //make table
 
   //retrieve important parts of grades
 for(i=0;i<tab.length;i++){
-  tab[i]=new Array(5);
+  tab[i]=new Array(4);
 }
 tab[0][0]="Course";
 tab[0][1]="Tri 1";
 tab[0][2]="Tri 2";
 tab[0][3]="Tri 3";
-tab[0][4]="Overall";
-var j=0;
+var j=1;
 
   //gets important parts from results
-  for(i=0;i<result.length-3;i++){
+  for(i=1;i<result.length-2;i++){
 
     if(result[i][11]!= null){
     var name = result[i][11];
     var tri1 = result[i][12];
     var tri2 = result[i][13];
     var tri3 = result[i][14];
-    var overall = result[i][15];
+
 
 
     if(tri1.includes("\n") || tri2.includes("\n") || tri3.includes("\n")){  //makes sure class exists/has grades
@@ -79,7 +80,6 @@ var j=0;
       tab[j][1]=tri1;
       tab[j][2]=tri2;
       tab[j][3]=tri3;
-      tab[j][4]=overall;
       j++;
     }
   }
