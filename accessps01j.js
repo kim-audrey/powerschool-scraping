@@ -110,7 +110,7 @@ var j=0;
   con.connect(function(err) {
     if (err) throw err;
         //update in current
-    var sql = `UPDATE user SET current = ${json} AND previous = null WHERE id =2`;
+    var sql = `UPDATE user SET current = "jfnvsljvnsl" AND previous = null WHERE id =2`;
 
     con.query(sql, function (err, result) {
       if (err) throw err;
